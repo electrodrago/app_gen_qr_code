@@ -1,6 +1,7 @@
 package com.viet.qrcodegen
 
 import android.graphics.Bitmap
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -39,8 +40,11 @@ class MainActivity : AppCompatActivity() {
                     val height = bitMatrix.height
                     val bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)
                     for (i in 0 until width) {
-
+                        for (j in 0 until height) {
+                            bmp.setPixel(i, j, if (bitMatrix[i, j]) Color.BLACK else Color.WHITE)
+                        }
                     }
+                    ivQRcode.setImageBitmap(bmp)
                 } catch (e: WriterException) {
                     e.printStackTrace()
                 }
